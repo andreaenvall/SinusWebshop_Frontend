@@ -1,0 +1,62 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.Admin.OrderDetailsModel
+@{
+}
+<div>
+    <h4>ProduktModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KundModel.OrderNummer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KundModel.OrderNummer)
+        </dd>
+        <dt class="col-sm-2">
+            Kund:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KundModel.Förnamn) @Html.DisplayFor(model => model.KundModel.Efternamn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KundModel.Leveransadress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KundModel.Leveransadress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KundModel.Stad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KundModel.Stad)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KundModel.Postnummer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KundModel.Postnummer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KundModel.Telefonnummer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KundModel.Telefonnummer)
+        </dd>
+        <dd class="col-sm-10">
+            Ordrar:
+            @foreach(var prod in Model.KundModel.KöptaProdukter)
+            {
+            <ul>
+                <li>ProduktNummer:@prod.Produktnummer</li>
+                <li>Titel: @prod.ProduktNamn</li>
+                <li>Färg: @prod.Färg</li>
+                <li>Antal: @prod.Antal</li>
+            </ul>
+
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./OrderList">Back to all orders</a>
+</div>

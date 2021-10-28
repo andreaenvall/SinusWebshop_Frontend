@@ -1,0 +1,119 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.CreateKöpModel
+
+
+<div class="container" align="center">
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <form class="card-body" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+
+                        <!--firstName-->
+                        <div class="md-form ">
+                            <input type="text" id="firstName" class="form-control" asp-for="KundModel.Förnamn">
+                            <label for="firstName" class="" asp-for="KundModel.Förnamn">Förnamn</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+
+                        <div class="md-form">
+                            <input type="text" id="lastName" class="form-control" asp-for="KundModel.Efternamn">
+                            <label for="lastName" class="" asp-for="KundModel.Efternamn">Efternamn</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!--email-->
+                <div class="md-form mb-5">
+                    <input type="text" id="email" class="form-control" placeholder="youremail@example.com" asp-for="KundModel.Email">
+                    <label for="email" class="" asp-for="KundModel.Email">Email (optional)</label>
+                </div>
+
+                <!--address-->
+                <div class="md-form mb-5">
+
+                    <input type="text" id="address" class="form-control" placeholder="1234 Main St" asp-for="KundModel.Leveransadress">
+                    <label for="address" class="" asp-for="KundModel.Leveransadress">Leveransadress</label>
+
+                </div>
+                <!--Grid row-->
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+
+                        <input type="text" class="form-control" asp-for="KundModel.Stad">
+                        <label for="zip" asp-for="KundModel.Stad">Stad</label>
+
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+
+                        <input type="text" class="form-control" placeholder="432 45" asp-for="KundModel.Postnummer">
+                        <label for="zip" asp-for="KundModel.Postnummer">PostNummer</label>
+
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+
+                        <input type="text" class="form-control" placeholder="+461234567" asp-for="KundModel.Telefonnummer">
+                        <label for="zip" asp-for="KundModel.Telefonnummer">Telefonnummer</label>
+
+                    </div>
+                   
+
+                </div>
+
+
+
+                <hr>
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="same-address">
+                    <label class="custom-control-label" for="same-address">Bekräfta att du inte är en robot</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info">
+                    <label class="custom-control-label" for="save-info">Bekräfta att du tagit del av vilkoren</label>
+                </div>
+
+                <hr>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input">
+                        <label class="custom-control-label" for="credit">Credit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input">
+                        <label class="custom-control-label" for="debit">Swish</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input">
+                        <label class="custom-control-label" for="paypal">Klarna</label>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-dark btn-lg btn-block" type="submit" asp-route-rabatt="@Model.Rabatt">Bekräfta Köp</button>
+
+            </form>
+
+        </div>
+        <!--/.Card-->
+
+    </div>
+</div>
+
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

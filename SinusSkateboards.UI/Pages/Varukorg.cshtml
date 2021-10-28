@@ -1,0 +1,134 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.VarukorgModel
+@using SinusSkateboards.UI.Models
+@{
+    Layout = "_Cart";
+}
+
+@if (Model.CookieProdukter.Count > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-lg-9">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-shopping-cart">
+
+
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th scope="col">Produkt</th>
+                                    <th scope="col" width="120">Antal</th>
+                                    <th scope="col" width="120">Pris</th>
+                                    <th scope="col" class="text-right d-none d-md-block" width="200"></th>
+                                </tr>
+                            </thead>
+
+
+                            @foreach (var produkt in Model.CookieProdukter)
+                            {
+                                Model.SumVaror++;
+                                Model.SumPrize += produkt.Pris;
+                                Model.id = produkt.Id;
+                                var price = produkt.Pris / produkt.Antal;
+
+
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <figure class="itemside align-items-center">
+                                                <div class="aside"><img src="~/images/@produkt.ImgPath" width="70" height="70" style="object-fit: contain; max-height: 100%; max-width: 100%;"></div>
+                                                <figcaption class="info">
+                                                    <a href="#" class="title text-dark" data-abc="true">@produkt.ProduktNamn</a>
+                                                    <p class="text-muted small">Färg: @produkt.Färg <br> Kategori: @produkt.Produktkategori</p>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <form method="post" asp-page-handler="minus">
+                                                    <div class="input-group">
+                                                        <input type="hidden" value="@produkt.Id" name="id" />
+                                                        <span class="input-group-btn">
+                                                            <button type="submit" class="resetbtn mt-1">
+                                                                <i class="fa fa-minus p-2"></i>
+                                                            </button>
+                                                        </span>
+                                                </form>
+                                                <input type="text" class="form-control input-number" value="@produkt.Antal" min="1" max="10">
+
+                                                <form method="post" asp-page-handler="plus">
+                                                    <input type="hidden" value="@produkt.Id" name="id" />
+                                                    <span class="input-group-btn">
+                                                        <button type="submit" class="resetbtn mt-1">
+                                                            <i class="fa fa-plus p-2"></i>
+                                                        </button>
+                                                    </span>
+                                                </form>
+                                            </div>
+
+
+
+
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap"> <var class="price">@produkt.Pris SEK</var> <small class="text-muted"> SEK / st: @price </small> </div>
+                                        </td>
+                                        <td class="text-right d-none d-md-block">
+                                            <form method="post" asp-page-handler="delete"> <input type="hidden" value="@produkt.Id" name="id" /><button class="btn btn-light">Ta bort</button></form>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            }
+
+                            @{var slutpris = Model.SumPrize - Model.Rabatt;
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </aside>
+            <aside class="col-lg-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form method="post" asp-page-handler="rabatt">
+                            <div class="form-group">
+                                <input type="hidden" value="@Model.SumPrize" name="SumPris" />
+                                <label>Har du en rabattkod?</label>
+                                <div class="input-group"> <input type="text" class="form-control coupon" name="rabatt" placeholder="Rabattkod"> <span class="input-group-append"> <button class="btn btn-dark btn-apply coupon">Använd</button> </span> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Summa pris:</dt>
+                            <dd class="text-right ml-3">@Model.SumPrize SEK</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Rabatt:</dt>
+                            <dd class="text-right text-danger ml-3">@Model.Rabatt SEK</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Total:</dt>
+                            <dd class="text-right text-dark b ml-3"><strong>@slutpris SEK</strong></dd>
+                        </dl>
+                        <hr> <a asp-route-produkter="@Model.CookieProdukter" asp-page="./CreateKöp" asp-route-varor="@Model.SumVaror" asp-route-rabatt="@Model.Rabatt" class="btn btn-out btn-success btn-square btn-main">Gå till kassan</a> <a asp-page="./ProductList" class="btn btn-out btn-dark btn-square btn-main mt-2" data-abc="true">Fortsätt Shoppa</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container text-center">
+        <h1>Din varukorg är tom!</h1>
+        <hr>
+        <a class="btn btn-dark" asp-page="./ProductList">Fortsätt shoppa</a>
+    </div>
+}
+
+

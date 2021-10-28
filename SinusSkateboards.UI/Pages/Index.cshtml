@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<a asp-page="">
+    <video class="Allover" width="1500" height="800" autoplay>
+        <source src="~/Video/Skate - 49791.mp4" type="video/ogg">
+        <source class="img-fluid rounded-3 my-5" src="./Video/Skate - 49791.mp4" alt="..." type="video/mp4" />
+    </video>
+</a>
+
+<div class="text-center hompage">
+    <h1 class="h-100 ">SKATE. EAT. SLEEP. REPEAT.</h1>
+    <a class="btn btn-dark mt-3" asp-page="./ProductList">Börja shoppa</a>
+</div>

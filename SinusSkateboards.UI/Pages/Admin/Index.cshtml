@@ -1,0 +1,70 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.Admin.IndexModel
+
+<p>
+    <a asp-page="Create" class="btn btn-dark m-1">Create New</a>
+    <a asp-page="OrderList" class="btn btn-dark">Se ordrar</a>
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktModel[0].ProduktNamn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktModel[0].Produktkategori)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktModel[0].Produktnummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktModel[0].Färg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktModel[0].Pris)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktModel[0].ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktModel[0].Beskrivning)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ProduktModel) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProduktNamn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produktkategori)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produktnummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Färg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pris)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beskrivning)
+            </td>
+           
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ProduktId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ProduktId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ProduktId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

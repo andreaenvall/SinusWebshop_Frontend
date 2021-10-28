@@ -1,0 +1,33 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.Admin.OrderListModel
+@{
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KundModel[0].OrderNummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KundModel[0].Datum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.KundModel)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderNummer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datum)
+                </td>
+                <td>
+                    <a asp-page="./OrderDetails" asp-route-ordernummer="@item.OrderNummer" asp-route-id="@item.Id">Se hela ordern</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

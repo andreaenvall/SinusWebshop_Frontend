@@ -1,0 +1,115 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.ProductListModel
+@using SinusSkateboards.UI.Models
+
+
+<div class="row sortera">
+
+    <form class="sort">
+        <div class="wrap">
+            <div class="kategorisera">
+                <select name="Kategori" id="Kategori" asp-for="Kategori" class="classic">
+                    <option value="alla">Kategorier</option>
+                    <option value="Skateboards">Skateboards</option>
+                    <option value="Hoodies">Hoodies</option>
+                    <option value="Tshirts">Tshirts</option>
+                    <option value="Keps">Keps</option>
+                    <option value="Skateboardtillbehör">Skateboardtillbehör</option>
+                </select>
+                <button class="resetbtn refresh" type="submit" value="Submit"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </form>
+
+    <form class="sort">
+        <div class="wrap">
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="Sök produkt.." asp-for="SearchString">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+                </div>
+            </div>
+
+    </form>
+
+</div>
+<div class="row colors">
+    <form>
+        <label>Färg</label>
+        <input type="hidden" value="röd" name="Färg" asp-for="Färg" />
+        <button type="submit" class="resetbtn röd m-2">h</button>
+    </form>
+    <form>
+        <input type="hidden" value="blå" name="Färg" asp-for="Färg" />
+        <button type="submit" class="resetbtn blå m-2">h</button>
+    </form>
+    <form>
+
+        <input type="hidden" value="grön" name="Färg" asp-for="Färg" />
+        <button type="submit" class="resetbtn grön m-2">h</button>
+    </form>
+    <form>
+
+        <input type="hidden" value="rosa" name="Färg" asp-for="Färg" />
+        <button type="submit" class="resetbtn rosa m-2">h</button>
+    </form>
+    <form>
+
+        <input type="hidden" value="lila" name="Färg" asp-for="Färg" />
+        <button type="submit" class="resetbtn lila m-2">h</button>
+    </form>
+    <form>
+
+        <input type="hidden" value="svart" name="Färg" asp-for="Färg" />
+        <button type="submit" class="resetbtn svart m-2">h</button>
+    </form>
+    <form>
+
+        <input type="hidden" value="gul" name="Färg" asp-for="Färg" />
+        <button type="submit" class="resetbtn gul m-2">h</button>
+    </form>
+   
+</div>
+
+
+
+<div class="produkts">
+    @foreach (var item in Model.ProduktModel)
+    {
+
+        <div class="block">
+
+            <div class="top">
+                <ul>
+                    <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                    <li><span class="converse">@item.Produktkategori</span></li>
+                    <li>
+                        <form method="post">
+                            <input type="hidden" value="@item.ProduktId" name="id" />
+                            <button type="submit" class="varu-btn">
+                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                            </button>
+
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="middle">
+                <img src="~/images/@item.ImagePath" asp-append-version="true" />
+                <div class="hoverbutton">
+                    <a asp-page="./DetailsProdukt" asp-route-id="@item.ProduktId" class="btn btn-dark">Produktinfo</a>
+                </div>
+            </div>
+
+            <div class="bottom">
+                <div class="heading">@item.ProduktNamn</div>
+                <div class="info">@item.Beskrivning</div>
+                <div class="style">Färg: @item.Färg / Style: M9621C</div>
+                <div class="price">@item.Pris SEK </div>
+            </div>
+
+        </div>
+    }
+</div>

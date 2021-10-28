@@ -1,0 +1,114 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.OrderBekraftelseModel
+@{
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="text-left logo p-2 px-5"> <img src="~/images/logos/sinus-logo-landscape-small.png" width="50"> </div>
+                <div class="invoice p-5">
+                    <h5>Din order är bekräftad!</h5> <span class="font-weight-bold d-block mt-4">Hej @Model.KundModel.Förnamn!</span> <span>En orderbekräftelse kommer att skickas till @Model.KundModel.Email inom kort.</span>
+                    <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="py-2"> <span class="d-block text-muted">Datum</span> <span>@Model.KundModel.Datum.ToShortDateString()</span> </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2"> <span class="d-block text-muted">Ordernummer</span> <span>@Model.KundModel.OrderNummer</span> </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2"> <span class="d-block text-muted">LeveransAddress</span> <span>@Model.KundModel.Leveransadress, @Model.KundModel.Postnummer @Model.KundModel.Stad</span> </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="product border-bottom table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                @foreach (var prod in Model.KundModel.KöptaProdukter)
+                                {
+                                    Model.SummaPris += prod.Pris;
+                                <tr>
+                                    <td width="20%"> <img src="~/images/@prod.ImgPath" width="90"  height="50" style="object-fit: contain; max-height: 100%; max-width: 100%"> </td>
+                                    <td width="60%">
+                                        <span class="font-weight-bold">@prod.ProduktNamn</span>
+                                        <div class="product-qty"> <span>Färg: @prod.Färg</span> </div>
+                                        <div class="product-qty"> <span>Antal: @prod.Antal</span></div>
+</td>
+                                    <td width="20%">
+                                        <div class="text-right"> <span class="font-weight-bold">@prod.Pris SEK</span> </div>
+                                    </td>
+                                </tr>
+                                }
+                                @{
+                                    double rabatt = 0;
+                                    double x = 0;
+                                    var summaPris = Model.SummaPris;
+
+                                    if(Model.Rabatt > 0)
+                                    {
+                                        x = Model.SummaPris * 0.8;
+                                        summaPris = Math.Round(x, 1, MidpointRounding.ToEven);
+                                        rabatt = Model.SummaPris * 0.2;
+                                        rabatt = Math.Round(rabatt, 1, MidpointRounding.ToEven);
+                                    }
+
+
+                                 }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-md-5">
+                            <table class="table table-borderless">
+                                <tbody class="totals">
+                                    <tr>
+                                        <td>
+                                            <div class="text-left"> <span class="text-muted">Summa</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span>@Model.SummaPris SEK</span> </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="text-left"> <span class="text-muted">FraktKostnad</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span>0 SEK</span> </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <div class="text-left"> <span class="text-muted">Rabatt</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span class="text-success">@rabatt SEK</span> </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-top border-bottom">
+                                        <td>
+                                            <div class="text-left"> <span class="font-weight-bold">Totalsumma</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span class="font-weight-bold">@summaPris SEK</span> </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p>Dina varor skickas mellan 2-3 arbetsdagar</p>
+                </div>
+                <div class="d-flex justify-content-between footer p-3"> <span>Behöver du hjälp? besök <a href="#"> kundservice</a></span> <span>@DateTime.Now</span> </div>
+            </div>
+        </div>
+    </div>
+</div>
+

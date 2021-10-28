@@ -1,0 +1,115 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.DetailsProduktModel
+@using SinusSkateboards.UI.Models
+
+
+<div class="detailprod">
+    <div class="container dark-grey-text mt-5">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+                <img src="~/images/@Model.ProduktModel.ImagePath" alt="" width="450" height="450" style="object-fit: contain; max-height: 100%; max-width: 100%;">
+
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+                <!--Content-->
+                <div class="p-4">
+
+                    <div class="mb-3">
+                        <a href="">
+                            <span class="badge purple mr-1">@Html.DisplayFor(model => model.ProduktModel.Produktkategori)</span>
+                        </a>
+                    </div>
+
+                    <p class="lead">
+                        <span>@Html.DisplayFor(model => model.ProduktModel.Pris) SEK</span>
+                    </p>
+
+                    <p class="lead font-weight-bold">Beskrivning</p>
+
+                    <p>
+                        @Html.DisplayFor(model => model.ProduktModel.Beskrivning)
+                    </p>
+
+                    <form method="post" class="d-flex justify-content-left">
+                        <!-- Default input -->
+                        <input type="number" value="1" name="Antal" aria-label="Search" class="form-control mr-2" style="width: 100px">
+                        <input type="hidden" asp-route-id="@Model.ProduktModel.ProduktId" />
+                        <button class="btn btn-dark btn-md my-0 p" type="submit">
+                            Lägg i varukorg
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </button>
+
+                    </form>
+
+                </div>
+                <!--Content-->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+
+    </div>
+</div>
+
+<h2 class="text-center p-1 alert-light">Utforska andra färger av den här produkten</h2>
+<div class="produkts">
+
+    @foreach (var item in Model.Produkter)
+    {
+        if (item.Produktkategori == Model.ProduktModel.Produktkategori)
+        {
+            <div class="block">
+
+                <div class="top">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                        <li><span class="converse">@item.Produktkategori</span></li>
+                        <li>
+                            <form method="post">
+                                <input type="hidden" value="@item.ProduktId" name="id" />
+                                <button type="submit" class="varu-btn">
+                                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                </button>
+
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="middle">
+                    <img src="~/images/@item.ImagePath" asp-append-version="true" />
+                    <div class="hoverbutton">
+                        <a asp-page="./DetailsProdukt" asp-route-id="@item.ProduktId" class="btn btn-danger">Produktinfo</a>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <div class="heading">@item.ProduktNamn</div>
+                    <div class="info">@item.Beskrivning</div>
+                    <div class="style">Color: @item.Färg / Style: M9621C</div>
+                    <div class="price">@item.Pris SEK </div>
+                </div>
+
+            </div>
+
+
+        }
+
+
+    }
+    </div>
+
+
+
+
+    <a asp-page="./Index">Back to List</a> |
+

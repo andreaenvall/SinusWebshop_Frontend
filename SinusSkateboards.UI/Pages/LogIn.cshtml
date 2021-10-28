@@ -1,0 +1,22 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.LogInModel
+@{
+}
+
+<h1>Logga In</h1>
+
+<form method="post">
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p class="text-danger">@Model.ErrorMessage</p>
+    }
+    <span class="text-warning" asp-validation-for="@Model.Username"></span>
+    <br />
+    <label for="username">UserName:</label>
+    <input id="username" type="text" asp-for="@Model.Username" />
+    <span class="text-warning" asp-validation-for="@Model.Password"></span>
+    <br />
+    <label for="password">Password</label>
+    <input id="password" type="password" asp-for="@Model.Password" />
+    <button class="btn btn-outline-success">Sign In</button>
+</form>

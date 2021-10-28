@@ -1,0 +1,60 @@
+﻿@page
+@model SinusSkateboards.UI.Pages.Admin.CreateModel
+@using SinusSkateboards.UI.Models
+
+<h4>ProduktModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProduktModel.ProduktNamn" class="control-label"></label>
+                <input asp-for="ProduktModel.ProduktNamn" class="form-control" />
+                <span asp-validation-for="ProduktModel.ProduktNamn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProduktModel.Produktkategori" class="control-label"></label>
+                <select asp-for="ProduktModel.Produktkategori" asp-items="Html.GetEnumSelectList<ProduktKategori>()"></select>
+                <span asp-validation-for="ProduktModel.Produktkategori" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProduktModel.Produktnummer" class="control-label"></label>
+                <input asp-for="ProduktModel.Produktnummer" class="form-control" />
+                <span asp-validation-for="ProduktModel.Produktnummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProduktModel.Färg" class="control-label"></label>
+                <input asp-for="ProduktModel.Färg" class="form-control" />
+                <span asp-validation-for="ProduktModel.Färg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProduktModel.Pris" class="control-label"></label>
+                <input asp-for="ProduktModel.Pris" class="form-control" />
+                <span asp-validation-for="ProduktModel.Pris" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="ProduktModel.ImagePath" class="control-label"></label>
+                <input asp-for="ProduktModel.ImagePath" class="form-control" />
+                <span asp-validation-for="ProduktModel.ImagePath" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ProduktModel.Beskrivning" class="control-label"></label>
+                <input asp-for="ProduktModel.Beskrivning" class="form-control" />
+                <span asp-validation-for="ProduktModel.Beskrivning" class="text-danger"></span>
+            </div>
+            <input type="file" asp-for="@Model.Photo" class="mt-2" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
